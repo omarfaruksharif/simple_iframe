@@ -44,19 +44,6 @@ function plugin_version() {
 }
 
 
-
-
-/* add_filter('wp_default_editor', create_function('', 'return "html";'));*/
-
-//add_action( 'after_wp_tiny_mce', 'simple_iframe_after_wp_tiny_mce' );
-function simple_iframe_after_wp_tiny_mce() {
-    wp_enqueue_script( 'simple-iframe-scripts', SIMPLE_IFRAME_PLUGIN_URL . 'assets/js/simple_iframe.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload','thickbox' ) );
-    wp_enqueue_script('jquery-ui-resizable');
-    //wp_enqueue_style( 'simple-iframe-styles', SIMPLE_IFRAME_PLUGIN_URL. 'css/style.css', array( 'thickbox' ) );
-    //wp_enqueue_style( 'custom', SIMPLE_IFRAME_PLUGIN_URL.'assets/css/custom.css' );
-}
-
-
 /*
  * Add button to the media button context in edit/add new post screen
  *
@@ -75,6 +62,11 @@ function simple_iframe_media_button($context) {
                     class='button thickbox' title='Simple Iframe Generator'>Simple Iframe</a>";
 
     return $context;
+}
+
+function simple_iframe_after_wp_tiny_mce() {
+    wp_enqueue_script( 'simple-iframe-scripts', SIMPLE_IFRAME_PLUGIN_URL . 'assets/js/simple_iframe.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload','thickbox' ) );
+    wp_enqueue_script('jquery-ui-resizable');
 }
 
 function add_inline_simple_iframe_popup_content() {
@@ -120,5 +112,6 @@ function add_inline_simple_iframe_popup_content() {
 
     <?php
 }
+
 
 
