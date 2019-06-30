@@ -59,77 +59,76 @@ function simple_iframe_media_button($context) {
     simple_iframe_after_wp_tiny_mce();
 
     $buttonName = apply_filters( 'simple_iframe_media_button_name', __('Simple Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN) );
-    $context .= "<a id='simple_iframe_popup_link' href='#TB_inline?width=650&height=300&inlineId=simple_iframe_popup_container&guid=".uniqid()."' 
+    $context .= "<a id='simple_iframe_popup_link' href='#TB_inline?width=650&height=350&inlineId=simple_iframe_popup_container&guid=".uniqid()."' 
                     class='button thickbox' title='{$buttonName} Generator'>{$buttonName}</a>";
 
     return $context;
 }
 
 function simple_iframe_after_wp_tiny_mce() {
-    wp_enqueue_script( 'simple-iframe-scripts', SIMPLE_IFRAME_PLUGIN_URL . 'assets/js/simple_iframe.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload','thickbox' ) );
+    wp_enqueue_script( 'simple-iframe-script', SIMPLE_IFRAME_PLUGIN_URL . 'assets/js/simple_iframe.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker', 'media-upload','thickbox' ) );
     wp_enqueue_script('jquery-ui-resizable');
+
+    if( apply_filters( 'simple_iframe_include_bootstrap', 1 ) ) {
+        wp_enqueue_style( 'simple-iframe-bootstrap-style', SIMPLE_IFRAME_PLUGIN_DIR . 'assets/css/bootstrap-4.0.0.min.css' );
+    }
+    wp_enqueue_style( 'simple-iframe-style', SIMPLE_IFRAME_PLUGIN_URL . 'assets/css/simple_iframe.css' );
 }
 
 function add_inline_simple_iframe_popup_content() {
     ?>
     <div id="simple_iframe_popup_container">
-        <div class="wrap" id="tabs_container">
-            <ul class="tabs">
-                <li class="active">
-                    <a href="#" id="simple-iframe-tab" rel="#simple-iframe-tab-contents" class="tab">Generator Block</a>
-                </li>
-            </ul>
+        <div class="simple_iframe_popup_container">
+            <div class="wrap" id="tabs_container">
+                <ul class="tabs">
+                    <li class="active">
+                        <a href="#" id="simple-iframe-tab" rel="#simple-iframe-tab-contents" class="tab">Generator Block</a>
+                    </li>
+                </ul>
 
-            <div class="tab_contents_container">
-                <div id="simple-iframe-tab-contents" class="simple-iframe-tab-contents tab_contents_active">
-                    <form id="simple_iframe_form">
-                        <ul>
-                            <li>
-                                <label for="simple_iframe_url">File URL:<em>*</em></label>
-                                <input type="text" id="simple_iframe_url" name="simple_iframe_url" />
-                            </li>
-                            <li>
-                                <label for="simple_iframe_width">Iframe Width:<em>*</em></label>
-                                <input type="text" id="simple_iframe_width" name="simple_iframe_width" value="100%" />
-                            </li>
-                            <li>
-                                <label for="simple_iframe_height">Iframe Height: <em>*</em></label>
-                                <input type="text" id="simple_iframe_height" name="simple_iframe_height" value="600px"/>
-                            </li>
-                        </ul>
+                <div class="tab_contents_container">
+                    <div id="simple-iframe-tab-contents" class="simple-iframe-tab-contents tab_contents_active">
+                        <form id="simple_iframe_form">
+                            <div class="row iframe_url_wrapper">
+                                <div class="col-3">
+                                    <label for="simple_iframe_url" class="simple_iframe_label">File URL:<em class="required">*</em></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" id="simple_iframe_url" name="simple_iframe_url" class="simple_iframe_field" />
+                                </div>
+                            </div>
+                            <div class="row iframe_width_wrapper">
+                                <div class="col-3">
+                                    <label for="simple_iframe_width" class="simple_iframe_label">Iframe Width:<em class="required">*</em></label>
+                                </div>
+                                <div class="col-6 no-padding">
+                                    <input type="text" id="simple_iframe_width" name="simple_iframe_width" class="simple_iframe_field" value="100%" />
+                                </div>
+                                <div class="col-3">
+                                    <span class="description">Ex: 100% or 600px</span>
+                                </div>
+                            </div>
+                            <div class="row iframe_height_wrapper">
+                                <div class="col-3">
+                                    <label for="simple_iframe_height" class="simple_iframe_label">Iframe Height: <em class="required">*</em></label>
+                                </div>
+                                <div class="col-6 no-padding">
+                                    <input type="text" id="simple_iframe_height" name="simple_iframe_height" class="simple_iframe_field" value="600px"/>
+                                </div>
+                                <div class="col-3">
+                                    <span class="description">Ex: 100% or 600px</span>
+                                </div>
+                            </div>
 
-                        <input class="button-primary" type="button" id="simple_iframe_generate" value="<?php _e('Insert Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN ); ?>">
-                        <a class="button" onclick="tb_remove(); return false;" href="#">Cancel</a>
+                            <div class="row simple_iframe_buttons_wrapper">
+                                <input class="button button-primary" type="button" id="simple_iframe_generate" value="<?php _e('Insert Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN ); ?>">
+                                <a class="button" onclick="tb_remove(); return false;" href="#">Cancel</a>
+                            </div>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <style type="text/css">
-                #simple_iframe_popup_container {
-                    display: none;
-                }
-                #simple_iframe_form ul li label {
-                    width: 140px;
-                    display: inline-block;
-                }
-                #simple_iframe_form ul li label em {
-                    color: red;
-                }
-                #simple_iframe_form ul li input {
-                    width: 25%;
-                }
-                #simple_iframe_form ul li input#simple_iframe_url {
-                    width: 67%;
-                }
-                #simple_iframe_form #simple_iframe_generate {
-                    margin-left: 145px;
-                }
-                #TB_ajaxContent {
-                    height: 300px !important;
-                }
-            </style>
-
         </div>
     </div>
 
