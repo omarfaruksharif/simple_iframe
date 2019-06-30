@@ -58,8 +58,9 @@ function simple_iframe_media_button($context) {
 
     simple_iframe_after_wp_tiny_mce();
 
+    $buttonName = apply_filters( 'simple_iframe_media_button_name', __('Simple Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN) );
     $context .= "<a id='simple_iframe_popup_link' href='#TB_inline?width=650&height=300&inlineId=simple_iframe_popup_container&guid=".uniqid()."' 
-                    class='button thickbox' title='Simple Iframe Generator'>Simple Iframe</a>";
+                    class='button thickbox' title='{$buttonName} Generator'>{$buttonName}</a>";
 
     return $context;
 }
