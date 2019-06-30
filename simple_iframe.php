@@ -71,9 +71,7 @@ function simple_iframe_after_wp_tiny_mce() {
 
 function add_inline_simple_iframe_popup_content() {
     ?>
-    <div id="simple_iframe_popup_container" style="display:none;">
-        <h2><?php bloginfo('name');_e('Shortcode Manager', 'projectx');?></h2>
-
+    <div id="simple_iframe_popup_container">
         <div class="wrap" id="tabs_container">
             <ul class="tabs">
                 <li class="active">
@@ -83,30 +81,54 @@ function add_inline_simple_iframe_popup_content() {
 
             <div class="tab_contents_container">
                 <div id="simple-iframe-tab-contents" class="simple-iframe-tab-contents tab_contents_active">
-                    <!--ShortCode For Button Interface-->
-                    <form>
-                        <ul id="btn_shortcode">
-
+                    <form id="simple_iframe_form">
+                        <ul>
                             <li>
-                                <label style="width:140px;display: inline-block;">File URL:<em style="color:red">*</em></label>
-                                <input type="text" id="simple_iframe_url" name="simple_iframe_url" style="width:67%" />
+                                <label for="simple_iframe_url">File URL:<em>*</em></label>
+                                <input type="text" id="simple_iframe_url" name="simple_iframe_url" />
                             </li>
                             <li>
-                                <label style="width:140px;display: inline-block;">Iframe Width:<em style="color:red">*</em></label>
-                                <input type="text" id="simple_iframe_width" name="simple_iframe_width" style="width:25%" value="100%" />
+                                <label for="simple_iframe_width">Iframe Width:<em>*</em></label>
+                                <input type="text" id="simple_iframe_width" name="simple_iframe_width" value="100%" />
                             </li>
                             <li>
-                                <label style="width:140px;display: inline-block;">Iframe Height: <em style="color:red">*</em></label>
-                                <input type="text" id="simple_iframe_height" name="simple_iframe_height" style="width:25%" value="600px"/>
+                                <label for="simple_iframe_height">Iframe Height: <em>*</em></label>
+                                <input type="text" id="simple_iframe_height" name="simple_iframe_height" value="600px"/>
                             </li>
                         </ul>
 
-                        <input class="button-primary" type="button" id="simple_iframe_generate" style="margin-left:145px" value="<?php _e('Insert Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN ); ?>">
+                        <input class="button-primary" type="button" id="simple_iframe_generate" value="<?php _e('Insert Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN ); ?>">
                         <a class="button" onclick="tb_remove(); return false;" href="#">Cancel</a>
 
                     </form>
                 </div>
             </div>
+
+            <style type="text/css">
+                #simple_iframe_popup_container {
+                    display: none;
+                }
+                #simple_iframe_form ul li label {
+                    width: 140px;
+                    display: inline-block;
+                }
+                #simple_iframe_form ul li label em {
+                    color: red;
+                }
+                #simple_iframe_form ul li input {
+                    width: 25%;
+                }
+                #simple_iframe_form ul li input#simple_iframe_url {
+                    width: 67%;
+                }
+                #simple_iframe_form #simple_iframe_generate {
+                    margin-left: 145px;
+                }
+                #TB_ajaxContent {
+                    height: 300px !important;
+                }
+            </style>
+
         </div>
     </div>
 
