@@ -52,10 +52,11 @@ function plugin_version() {
 add_action( 'media_buttons_context',  'simple_iframe_media_button' );
 
 add_action( 'admin_footer',  'add_inline_simple_iframe_popup_content' );
-add_action( 'wp_footer',  'add_inline_simple_iframe_popup_content' );
 
 function simple_iframe_media_button($context) {
 
+    add_action( 'wp_footer',  'add_inline_simple_iframe_popup_content' );
+    
     simple_iframe_after_wp_tiny_mce();
 
     $buttonName = apply_filters( 'simple_iframe_media_button_name', __('Simple Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN) );
@@ -87,7 +88,7 @@ function add_inline_simple_iframe_popup_content() {
                 </ul>
 
                 <div class="tab_contents_container">
-                    <div id="simple-iframe-tab-contents" class="simple-iframe-tab-contents tab_contents_active">
+                    <div id="simple-iframe-tab-contents" class="simple-iframe-tab-contents">
                         <form id="simple_iframe_form">
                             <div class="row iframe_url_wrapper">
                                 <div class="col-3">
