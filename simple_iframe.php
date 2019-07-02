@@ -4,7 +4,7 @@
 Plugin Name: Simple Iframe
 Plugin URI: https://github.com/omarfaruksharif/simple_iframe
 Description: Simple Iframe generator for WP. It will appear in the TinyMCE editor as a Media Button
-Version: 1.2.1
+Version: 1.2.2
 Author: Omar Faruk Sharif
 Author URI: https://github.com/omarfaruksharif/simple_iframe
 Text Domain: simple_iframe
@@ -51,12 +51,11 @@ function plugin_version() {
 
 add_action( 'media_buttons_context',  'simple_iframe_media_button' );
 
-add_action( 'admin_footer',  'add_inline_simple_iframe_popup_content' );
-
 function simple_iframe_media_button($context) {
 
     add_action( 'wp_footer',  'add_inline_simple_iframe_popup_content' );
-    
+    add_action( 'admin_footer',  'add_inline_simple_iframe_popup_content' );
+
     simple_iframe_after_wp_tiny_mce();
 
     $buttonName = apply_filters( 'simple_iframe_media_button_name', __('Simple Iframe', SIMPLE_IFRAME_PLUGIN_DOMAIN) );
